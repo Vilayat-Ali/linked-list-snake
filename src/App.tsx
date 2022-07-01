@@ -30,6 +30,9 @@ const App = (props: Props) => {
               "Syed Vilayat Ali Rizvi",
               "Vilayat's projects",
             ]}
+            ogTitle="Project : A React-based snake game that works on the concept of linked list"
+            ogDescription="A modern snake game built with React.js that works with the concept of linked-lists. In the game, snake is represented as a linked list with each section of snake's body is represented as a separated linked list node."
+            ogImage="https://i.morioh.com/210521/44bb944d.webp"
           >
             <Home />
           </Base>
@@ -51,6 +54,9 @@ const App = (props: Props) => {
               "react.js game",
               "react.js development",
             ]}
+            ogTitle="Playground : Enjoy the project!"
+            ogDescription="Play! oh, I mean test my project. Evaluate the idea of reinventing the same old game of snake with the mechanics of a linked list."
+            ogImage="https://png.clipart.me/image_preview/512/joystick-vector-9609.jpg"
           >
             <Playground />
           </Base>
@@ -68,6 +74,9 @@ const App = (props: Props) => {
               "Syed Vilayat Ali Rizvi",
               "Vilayat's projects",
             ]}
+            ogTitle="Meet the dev : Syed Vilayat Ali Rizvi"
+            ogDescription="Hello 👋! I am Syed Vilayat Ali Rizvi, a passionate programmer who likes to transfer ideas from his mind onto a monitor."
+            ogImage="https://avatars.githubusercontent.com/u/73014428?v=4"
           >
             <Dev />
           </Base>

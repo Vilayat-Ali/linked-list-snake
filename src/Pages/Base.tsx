@@ -5,10 +5,21 @@ type Props = {
   title: string;
   description: string;
   keywords: string[];
+  ogTitle: string;
+  ogDescription: string;
+  ogImage: string;
   children: React.ReactNode;
 };
 
-const Base = ({ title, description, keywords, children }: Props) => {
+const Base = ({
+  title,
+  description,
+  keywords,
+  ogTitle,
+  ogDescription,
+  ogImage,
+  children,
+}: Props) => {
   return (
     <Fragment>
       {/* SEO */}
@@ -16,6 +27,9 @@ const Base = ({ title, description, keywords, children }: Props) => {
         <title>{title}</title>
         <meta name="description" content={description} />
         <meta name="keywords" content={keywords.join(" ,")} />
+        <meta property="og:title" content={ogTitle} />
+        <meta property="og:description" content={ogDescription} />
+        <meta property="og:image" content={ogImage} />
       </Helmet>
       {/* SEO */}
 
