@@ -1,3 +1,4 @@
+// Libraries
 import { Routes, Route } from "react-router-dom";
 
 // importing page components

@@ -1,5 +1,5 @@
 // importing components
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../../components/Sidebar/PlayZoneSideBar";
 import PlayZone from "../../components/PlayZone";
 import { Fragment } from "react";
 
