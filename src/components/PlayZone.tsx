@@ -5,26 +5,6 @@ type Props = {};
 
 // snake
 
-// single linkedlist node
-class linkedNode {
-  data: { x: number; y: number };
-  next: linkedNode | null;
-  constructor(data: { x: number; y: number }, next: null) {
-    this.data = data;
-    this.next = next;
-  }
-}
-
-// snake linked list
-class Snake {
-  head: linkedNode | null;
-  size: number;
-  constructor() {
-    this.head = null;
-    this.size = 0;
-  }
-}
-
 const PlayZone = (props: Props) => {
   // state
   const [matrixSize, changeMatrixSize] = useState<number[]>(

@@ -4,6 +4,7 @@ import App from "./App";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
 
 // importing layout components
 import Navbar from "./components/Navbar";
@@ -14,11 +15,13 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Navbar />
-      <App />
-      <Footer />
-    </BrowserRouter>
+    <ChakraProvider>
+      <BrowserRouter>
+        <Navbar />
+        <App />
+        <Footer />
+      </BrowserRouter>
+    </ChakraProvider>
   </React.StrictMode>
 );
 
