@@ -1,5 +1,3 @@
-import { link } from "fs";
-
 // single linkedlist node
 class linkedNode {
   // data member
