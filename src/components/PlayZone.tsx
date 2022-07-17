@@ -15,36 +15,10 @@ const PlayZone = (props: Props) => {
     window.innerWidth < 600 ? null : config.playgroundSize // [ row, column]
   );
 
-  const [snakeDirection, setSnakeDirection] = useState<string | null>(null);
+  const [snakeDirection, setSnakeDirection] = useState<string | null>(null); // left or right
+  const [snakeMotionAxis, setSnakeMotionAxis] = useState<number>(0); // 0 for x and 1 for y
 
-  // snake instance
-  const play = () => {
-    var snake: Snake = new Snake();
-    snake.growSnake({ x: 1, y: 2 });
-    snake.growSnake({ x: 2, y: 2 });
-    const p: number[][] = parseSnake(snake);
-    console.log(p);
-  };
-
-  // parser function
-  const parseSnake = (snakeInstance: Snake): number[][] => {
-    var parsedSnakeArr: number[][] = [];
-    if (snakeInstance.size) {
-      var start = snakeInstance.head;
-      while (start.next != null) {
-        console.log(start.data);
-        parsedSnakeArr.push([start.data.x, start.data.y]); // making the parsed snake array
-        start = start.next;
-      }
-      console.log(start.data);
-      parsedSnakeArr.push([start.data.x, start.data.y]); // making the parsed snake array
-    }
-    return parsedSnakeArr;
-  };
-
-  useEffect(() => {
-    play();
-  });
+  const changeDirection = () => {};
 
   return (
     <div style={{ margin: "1vh auto border border-sky-500" }} className="ml-4">
