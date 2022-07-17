@@ -10,7 +10,6 @@ const parser = (snakeInstance: Snake): number[][] => {
       parsedSnakeArr.push([start.data.x, start.data.y]); // making the parsed snake array
       start = start.next;
     }
-    console.log(start.data);
     parsedSnakeArr.push([start.data.x, start.data.y]); // making the parsed snake array
   }
   return parsedSnakeArr;

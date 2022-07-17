@@ -1,5 +1,6 @@
 import generateRandom from "./randomGen";
 import config from "../config/app.config";
+import { start } from "repl";
 
 // single linkedlist node
 export class linkedNode {
@@ -19,13 +20,21 @@ class Snake {
   head: linkedNode;
   size: number;
   // constructor
-  constructor() {
+  constructor(reverseProcedureOn: boolean = false) {
     this.head = new linkedNode({
       // generate spawing location
       x: generateRandom(0, config.playgroundSize[0]),
       y: generateRandom(0, config.playgroundSize[1]),
     });
     this.size = 1;
+  }
+  // add element to the top of the linked list
+  addElementToHead(data: { x: number; y: number }): linkedNode {
+    const newNode = new linkedNode({ ...data });
+    newNode.next = this.head;
+    this.head = newNode;
+    this.size++;
+    return newNode;
   }
   // move snake
   moveSnakeTo(coord: { x: number; y: number }) {
@@ -57,7 +66,15 @@ class Snake {
     this.head.next = newBodyNode;
   }
   // reverse a linked list
-  reverseSnake() {}
+  reverseSnake() {
+    var start = this.head;
+    var newSnakeInstance = new Snake();
+    while (start.next != null) {
+      newSnakeInstance.addElementToHead({ ...start.data });
+      start = start.next;
+    }
+    this.head = newSnakeInstance.addElementToHead({ ...start.data }); // head
+  }
 }
 
 export default Snake;
