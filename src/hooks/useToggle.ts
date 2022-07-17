@@ -6,7 +6,7 @@ const useToggle = () => {
     useCallback(() => {
       setComponentState(!componentState);
     }, []);
-  return [componentState, Toggle];
+  return [componentState, Toggle] as const;
 };
 
 export default useToggle;

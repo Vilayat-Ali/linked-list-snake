@@ -1,5 +1,8 @@
+import generateRandom from "./randomGen";
+import config from "../config/app.config";
+
 // single linkedlist node
-class linkedNode {
+export class linkedNode {
   // data member
   data: { x: number; y: number };
   next: linkedNode | null;
@@ -16,9 +19,13 @@ class Snake {
   head: linkedNode;
   size: number;
   // constructor
-  constructor(spawnCoord: { x: number; y: number }) {
-    this.head = new linkedNode({ x: spawnCoord.x, y: spawnCoord.y });
-    this.size = 0;
+  constructor() {
+    this.head = new linkedNode({
+      // generate spawing location
+      x: generateRandom(0, config.playgroundSize[0]),
+      y: generateRandom(0, config.playgroundSize[1]),
+    });
+    this.size = 1;
   }
   // move snake
   moveSnakeTo(coord: { x: number; y: number }) {

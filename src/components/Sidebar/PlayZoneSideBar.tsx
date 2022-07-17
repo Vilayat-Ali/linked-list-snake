@@ -3,7 +3,7 @@ import { useState } from "react";
 
 type Props = {};
 
-const Sidebar = (props: Props) => {
+const SideBar = (props: Props) => {
   const listOptions: string[] = [
     "Reset Game",
     "Change Aesthetics",
@@ -49,4 +49,4 @@ const Sidebar = (props: Props) => {
   );
 };
 
-export default Sidebar;
+export default SideBar;

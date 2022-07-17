@@ -1,5 +1,6 @@
 // importing components
 import Sidebar from "../../components/Sidebar/PlayZoneSideBar";
+import MoveSideBar from "../../components/Sidebar/MoveSideBar";
 import PlayZone from "../../components/PlayZone";
 import { Fragment } from "react";
 
@@ -9,12 +10,15 @@ const Playground = (props: Props) => {
   return (
     <Fragment>
       {window.innerWidth > 700 ? (
-        <div className="flex">
+        <div className="flex items-center">
           <div className="d-flex">
             <Sidebar />
           </div>
-          <div className="d-flex">
+          <div className="d-flex ">
             <PlayZone />
+          </div>
+          <div className="d-flex">
+            <MoveSideBar />
           </div>
         </div>
       ) : (
