@@ -1,12 +1,14 @@
 // importing assets
 import { Fragment, useState } from "react";
 import Logo from "../assets/logo.png";
+import { Link, useLocation } from "react-router-dom";
 
 type Props = {};
 
 const Navbar = (props: Props) => {
   // toggle custom hook
   const [navState, ToggleNav] = useState<Boolean>(false);
+  const location = useLocation();
   // list of links
   const links = [
     {
@@ -14,7 +16,7 @@ const Navbar = (props: Props) => {
       href: "/",
     },
     {
-      title: "playground",
+      title: "play",
       href: "/play",
     },
     {
@@ -71,19 +73,20 @@ const Navbar = (props: Props) => {
           >
             <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
               {links.map((link) => (
-                <li key={link.title}>
-                  <a
-                    className={
-                      window.location.pathname === link.href
-                        ? "block text-xl underline py-2 pr-4 pl-3 text-gray-700 md:text-blue-700 md:p-0"
-                        : "block text-xl py-2 pr-4 pl-3 text-gray-700 md:bg-transparent md:text-gray-700 md:p-0"
-                    }
-                    aria-current="page"
-                    href={link.href}
-                  >
-                    {link.title}
-                  </a>
-                </li>
+                <Link to={link.href}>
+                  <li key={link.title}>
+                    <a
+                      className={
+                        location.pathname === link.href
+                          ? "block text-xl underline py-2 pr-4 pl-3 text-gray-700 md:text-blue-700 md:p-0"
+                          : "block text-xl py-2 pr-4 pl-3 text-gray-700 md:bg-transparent md:text-gray-700 md:p-0"
+                      }
+                      aria-current="page"
+                    >
+                      {link.title}
+                    </a>
+                  </li>
+                </Link>
               ))}
             </ul>
           </div>

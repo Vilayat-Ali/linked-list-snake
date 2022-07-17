@@ -13,10 +13,7 @@ import {
   Kbd,
 } from "@chakra-ui/react";
 
-import { useState } from "react";
-
 const Home = () => {
-  const [c, sc] = useState(false);
   return (
     <>
       <Head>
@@ -26,12 +23,17 @@ const Home = () => {
         />
       </Head>
 
-      <Container maxW={"3xl"}>
+      <Container
+        maxW={"3xl"}
+        style={
+          window.innerWidth < 700 ? { width: "100vw", height: "86vh" } : {}
+        }
+      >
         <Stack
           as={Box}
           textAlign={"center"}
           spacing={{ base: 8, md: 14 }}
-          py={{ base: 10, md: 12 }}
+          py={{ base: 5, md: 12 }}
         >
           <Heading
             fontWeight={600}
