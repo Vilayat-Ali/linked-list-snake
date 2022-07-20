@@ -1,5 +1,6 @@
 // importing assets
 import { Fragment, useState } from "react";
+import { Text } from "@chakra-ui/react";
 import Logo from "../assets/logo.png";
 import { Link, useLocation } from "react-router-dom";
 
@@ -72,19 +73,31 @@ const Navbar = (props: Props) => {
             id="mobile-menu"
           >
             <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-              {links.map((link) => (
-                <Link to={link.href}>
-                  <li key={link.title}>
-                    <a
-                      className={
+              {links.map((link, index) => (
+                <Link to={link.href} key={index}>
+                  <li>
+                    <Text
+                      bgColor={
+                        window.innerWidth < 700 &&
                         location.pathname === link.href
-                          ? "block text-xl underline py-2 pr-4 pl-3 text-gray-700 md:text-blue-700 md:p-0"
-                          : "block text-xl py-2 pr-4 pl-3 text-gray-700 md:bg-transparent md:text-gray-700 md:p-0"
+                          ? "green.500"
+                          : ""
                       }
-                      aria-current="page"
+                      color={
+                        window.innerWidth < 700
+                          ? location.pathname === link.href
+                            ? "white"
+                            : "gray.500"
+                          : location.pathname === link.href
+                          ? "green.500"
+                          : "gray.500"
+                      }
+                      fontSize={window.innerWidth > 700 ? "1.25vw" : "5vw"}
+                      p={2}
+                      onClick={() => ToggleNav(!navState)}
                     >
                       {link.title}
-                    </a>
+                    </Text>
                   </li>
                 </Link>
               ))}

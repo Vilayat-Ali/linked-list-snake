@@ -1,6 +1,5 @@
 import generateRandom from "./randomGen";
 import config from "../config/app.config";
-import { start } from "repl";
 
 // single linkedlist node
 export class linkedNode {

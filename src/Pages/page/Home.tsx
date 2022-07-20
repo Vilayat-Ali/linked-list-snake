@@ -1,4 +1,5 @@
 import Head from "react-helmet";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Box,
@@ -11,9 +12,28 @@ import {
   useColorModeValue,
   createIcon,
   Kbd,
+  Select,
+  Center,
 } from "@chakra-ui/react";
 
+// config
+import config from "../../config/app.config";
+
+// version
+export type github_version_type = {
+  version: string;
+  github_branch: string;
+  stable: boolean;
+};
+const github_version: github_version_type[] = config.version_history;
+
 const Home = () => {
+  // state
+  const [githubLink, setGithubLink]: [string, any] = useState<string>("");
+  const [message, setMessage]: [string | null, any] = useState<string | null>(
+    null
+  );
+
   return (
     <>
       <Head>
@@ -26,7 +46,7 @@ const Home = () => {
       <Container
         maxW={"3xl"}
         style={
-          window.innerWidth < 700 ? { width: "100vw", height: "86vh" } : {}
+          window.innerWidth < 700 ? { width: "100vw", height: "90vh" } : {}
         }
       >
         <Stack
@@ -34,35 +54,115 @@ const Home = () => {
           textAlign={"center"}
           spacing={{ base: 8, md: 14 }}
           py={{ base: 5, md: 12 }}
+          mt={window.innerWidth < 700 ? 10 : 0}
         >
           <Heading
             fontWeight={600}
-            fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
-            lineHeight={"110%"}
+            fontSize={
+              window.innerWidth < 700
+                ? { base: "5xl", sm: "6xl", md: "6xl" }
+                : { base: "2xl", sm: "6xl", md: "6xl" }
+            }
+            lineHeight={"120%"}
           >
-            Snake Game using <br />
+            Snake Game {window.innerWidth < 700 && <br />} <i>using</i>{" "}
+            {window.innerWidth < 700 && <br />}{" "}
+            {window.innerWidth > 700 && <br />}
             <Text as={"span"} color={"green.400"}>
               <b>Linked List</b>
             </Text>
           </Heading>
-          <Text color={"gray.500"}>
-            Linked lists are a powerful and most important data structure
-            concept in computer science. It is often feared among new
-            developers. Some even get nightmares of encountering it on a
-            real-world interview.
-            <br />I have implemented the concept of linked list into a fun
-            project, just to prove that linked lists are a lot of fun!
+          <Text color={"gray.500"} top={window.innerWidth < 700 ? 20 : 0}>
+            I have implemented the concept of linked list into a fun project,
+            proving that linked lists are a lot of fun!
           </Text>
           <Box>
-            <Kbd>Linked Lists</Kbd> + <Kbd>JavaScript/TypeScript</Kbd> ={" "}
-            <Kbd>Fun 😎</Kbd>
+            <Kbd>Linked Lists</Kbd> + <Kbd>JavaScript</Kbd> = <Kbd>Fun 😎</Kbd>
           </Box>
+
+          <Center>
+            <Box
+              display={window.innerWidth > 600 ? "flex" : "block"}
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Box mt={"12px"} width={window.innerWidth > 700 ? 500 : 300}>
+                <Text color={"gray.400"} sx={{ margin: "12px auto" }}>
+                  Version{" "}
+                  <Text
+                    color={
+                      message
+                        ? message === "(may be buggy)"
+                          ? "red.500"
+                          : "green.500"
+                        : ""
+                    }
+                  >
+                    {message}
+                  </Text>
+                </Text>
+                <Stack
+                  direction={window.innerWidth > 700 ? "row" : "column"}
+                  align={"center"}
+                  spacing={4}
+                >
+                  <Select
+                    placeholder="Select option"
+                    onChange={(e) => {
+                      e.preventDefault();
+                      setGithubLink(e.target.value);
+                      setMessage(
+                        github_version.filter(
+                          (v: any) =>
+                            v.github_branch ===
+                              e.target.value.substring(
+                                54,
+                                e.target.value.length
+                              ) && v.stable
+                        ).length !== 0
+                          ? "(stable release)"
+                          : e.target.value.charCodeAt(0) === 104
+                          ? "(may be buggy)"
+                          : ""
+                      );
+                    }}
+                  >
+                    {github_version.map((version, index) => (
+                      <option
+                        value={`https://github.com/Vilayat-Ali/linked-list-snake/tree/${version.github_branch}`}
+                        key={index}
+                      >
+                        {version.version}
+                      </option>
+                    ))}
+                  </Select>
+                  <Button
+                    onClick={() => (window.location.href = `${githubLink}`)}
+                    colorScheme={"green"}
+                    bg={"green.400"}
+                    px={6}
+                    _hover={{
+                      bg: "green.500",
+                    }}
+                    variant="solid"
+                    padding={4}
+                    width={60}
+                  >
+                    View in Github
+                  </Button>
+                </Stack>
+              </Box>
+            </Box>
+          </Center>
+
           <Stack
             direction={"column"}
             spacing={3}
             align={"center"}
             alignSelf={"center"}
             position={"relative"}
+            top={window.innerWidth < 700 ? 10 : 0}
           >
             <Link to="/play">
               <Button
@@ -77,31 +177,22 @@ const Home = () => {
                 Play the game
               </Button>
             </Link>
-            <Button
-              variant={"link"}
-              colorScheme={"blue"}
-              size={"sm"}
-              onClick={() =>
-                (window.location.href =
-                  "https://github.com/Vilayat-Ali/linked-list-snake")
-              }
-            >
-              github link
-            </Button>
+
             <Box>
               <Icon
                 as={Arrow}
                 color={useColorModeValue("gray.800", "gray.300")}
                 w={71}
                 position={"absolute"}
-                right={-71}
-                top={"10px"}
+                right={"-80px"}
+                transform={"rotate(-10deg)"}
+                top={"15px"}
               />
               <Text
                 fontSize={"lg"}
                 fontFamily={"Caveat"}
                 position={"absolute"}
-                right={"-125px"}
+                right={"-120px"}
                 top={"-15px"}
                 transform={"rotate(10deg)"}
               >
