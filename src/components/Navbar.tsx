@@ -17,12 +17,12 @@ const Navbar = (props: Props) => {
       href: "/",
     },
     {
-      title: "play",
+      title: "Play",
       href: "/play",
     },
     {
-      title: "dev",
-      href: "/dev",
+      title: "About",
+      href: "/about",
     },
   ];
   return (
@@ -77,6 +77,7 @@ const Navbar = (props: Props) => {
                 <Link to={link.href} key={index}>
                   <li>
                     <Text
+                      sx={{ textDecoration: "none" }}
                       bgColor={
                         window.innerWidth < 700 &&
                         location.pathname === link.href

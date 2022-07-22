@@ -25,7 +25,7 @@ const PlayZone = (props: Props) => {
     generateRandom(0, config.playgroundSize[1]),
   ]); // [x,y]
   const [snakeDirection, changeSnakeDirection]: [number, any] =
-    useState<number>(1); // 0 -> UP 1-> DOWN 2-> LEFT 3-> RIGHT
+    useState<number>(2); // 0 -> UP 1-> DOWN 2-> LEFT 3-> RIGHT
 
   // food
   const [food, newFoodLocation]: [

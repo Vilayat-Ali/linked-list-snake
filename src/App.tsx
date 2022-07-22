@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 // importing page components
 import Home from "./Pages/page/Home";
-import Dev from "./Pages/page/Dev";
+import About from "./Pages/page/About";
 import Playground from "./Pages/page/Playground";
 
 // importing Base component
@@ -65,10 +65,10 @@ const App = (props: Props) => {
       />
       {/* Dev Route */}
       <Route
-        path="/dev"
+        path="/about"
         element={
           <Base
-            title="Dev"
+            title="About"
             description="This is a project"
             keywords={[
               "syed vilayat ali rizvi",
@@ -79,7 +79,7 @@ const App = (props: Props) => {
             ogDescription="Hello 👋! I am Syed Vilayat Ali Rizvi, a passionate programmer who likes to transfer ideas from his mind onto a monitor."
             ogImage="https://avatars.githubusercontent.com/u/73014428?v=4"
           >
-            <Dev />
+            <About />
           </Base>
         }
       />
