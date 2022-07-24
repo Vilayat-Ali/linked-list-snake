@@ -6,10 +6,13 @@ import config from "../config/app.config";
 import generateRandom from "../game/randomGen";
 
 // importing game elements
-import Snake from "../game/snake";
 import spawnFood from "../game/food";
 
-type Props = {};
+type Props = {
+  isGamePaused: boolean;
+  snakeSpeed: number;
+  snakeColor: string;
+};
 
 const PlayZone = (props: Props) => {
   // state
@@ -25,7 +28,7 @@ const PlayZone = (props: Props) => {
     generateRandom(0, config.playgroundSize[1]),
   ]); // [x,y]
   const [snakeDirection, changeSnakeDirection]: [number, any] =
-    useState<number>(2); // 0 -> UP 1-> DOWN 2-> LEFT 3-> RIGHT
+    useState<number>(0); // 0 -> UP 1-> DOWN 2-> LEFT 3-> RIGHT
 
   // food
   const [food, newFoodLocation]: [
@@ -47,7 +50,22 @@ const PlayZone = (props: Props) => {
   const handleKey = useCallback((event: any): void => {
     switch (event.key) {
       case "ArrowLeft":
-        console.log("LEFT");
+        switch (snakeDirection) {
+          case 0:
+            changeSnakeDirection(2);
+            break;
+          case 1:
+            changeSnakeDirection(2);
+            break;
+          case 2:
+            changeSnakeDirection(1);
+            break;
+          case 3:
+            changeSnakeDirection(0);
+            break;
+          default:
+            break;
+        }
         break;
       case "ArrowRight":
         console.log("Right");
@@ -75,36 +93,38 @@ const PlayZone = (props: Props) => {
 
   // moving snake
   useEffect(() => {
-    switch (snakeDirection) {
-      case 0:
-        // UP
-        setTimeout(() => {
-          setSnakeHeadCoord([snakeHeadCoord[0] - 1, snakeHeadCoord[1]]);
-        }, 2000);
-        break;
-      case 1:
-        // DOWN
-        setTimeout(() => {
-          setSnakeHeadCoord([snakeHeadCoord[0] + 1, snakeHeadCoord[1]]);
-        }, 2000);
-        break;
-      case 2:
-        // LEFT
-        setTimeout(() => {
-          setSnakeHeadCoord([snakeHeadCoord[0], snakeHeadCoord[1] - 1]);
-        }, 2000);
-        break;
-      case 3:
-        // RIGHT
-        setTimeout(() => {
-          setSnakeHeadCoord([snakeHeadCoord[0], snakeHeadCoord[1] + 1]);
-        }, 2000);
-        break;
+    if (!props.isGamePaused) {
+      switch (snakeDirection) {
+        case 0:
+          // UP
+          setTimeout(() => {
+            setSnakeHeadCoord([snakeHeadCoord[0] - 1, snakeHeadCoord[1]]);
+          }, props.snakeSpeed);
+          break;
+        case 1:
+          // DOWN
+          setTimeout(() => {
+            setSnakeHeadCoord([snakeHeadCoord[0] + 1, snakeHeadCoord[1]]);
+          }, props.snakeSpeed);
+          break;
+        case 2:
+          // LEFT
+          setTimeout(() => {
+            setSnakeHeadCoord([snakeHeadCoord[0], snakeHeadCoord[1] - 1]);
+          }, props.snakeSpeed);
+          break;
+        case 3:
+          // RIGHT
+          setTimeout(() => {
+            setSnakeHeadCoord([snakeHeadCoord[0], snakeHeadCoord[1] + 1]);
+          }, props.snakeSpeed);
+          break;
+      }
     }
   });
 
   return (
-    <div style={{ margin: "1vh auto border border-sky-500" }} className="ml-4">
+    <div style={{ margin: "1vh auto " }} className="ml-4 border border-sky-500">
       {[...Array(matrixSize![0])].map((_row, rowId) => (
         <div className="flex" key={rowId}>
           {[...Array(matrixSize![1])].map((_cell, cellId) => (

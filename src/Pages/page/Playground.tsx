@@ -1,24 +1,58 @@
+// Libraries
+import { Fragment, useState } from "react";
+
+// ui
+
 // importing components
 import Sidebar from "../../components/Sidebar/PlayZoneSideBar";
 import MoveSideBar from "../../components/Sidebar/MoveSideBar";
 import PlayZone from "../../components/PlayZone";
-import { Fragment } from "react";
 
 type Props = {};
 
 const Playground = (props: Props) => {
+  // game state
+  const [isGamePaused, pauseGame]: [boolean, any] = useState<boolean>(true);
+  const [snakeSpeed, setSnakeSpeed]: [number, any] = useState<number>(1000);
+  const [snakeColor, setSnakeColor]: [string, any] = useState<string>("");
+  const [score, changeScore]: [number, any] = useState<number>(0);
   return (
     <Fragment>
       {window.innerWidth > 700 ? (
         <div className="flex items-center">
           <div className="d-flex">
-            <Sidebar />
+            <Sidebar
+              isGamePaused={isGamePaused}
+              pauseGameFunc={pauseGame}
+              snakeSpeedFunc={setSnakeSpeed}
+              snakeColorFunc={setSnakeColor}
+            />
           </div>
           <div className="d-flex ">
-            <PlayZone />
+            <PlayZone
+              isGamePaused={isGamePaused}
+              snakeSpeed={snakeSpeed}
+              snakeColor={snakeColor}
+            />
           </div>
           <div className="d-flex">
-            <MoveSideBar />
+            <MoveSideBar
+              moveList={[
+                {
+                  x: 4,
+                  y: 4,
+                },
+                {
+                  x: 5,
+                  y: 4,
+                },
+
+                {
+                  x: 6,
+                  y: 4,
+                },
+              ]}
+            />
           </div>
         </div>
       ) : (

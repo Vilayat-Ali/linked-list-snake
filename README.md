@@ -7,6 +7,8 @@ This game is built with React.js and uses the concepts and common algorithms of 
 ## Tech Stack
 
 - React.js
+- chakra UI
+- firebase
 - Tailwindcss
 - Typescript
 
