@@ -1,5 +1,5 @@
 // Libraries
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 // ui
 
@@ -16,6 +16,7 @@ const Playground = (props: Props) => {
   const [snakeSpeed, setSnakeSpeed]: [number, any] = useState<number>(1000);
   const [snakeColor, setSnakeColor]: [string, any] = useState<string>("");
   const [score, changeScore]: [number, any] = useState<number>(0);
+
   return (
     <Fragment>
       {window.innerWidth > 700 ? (

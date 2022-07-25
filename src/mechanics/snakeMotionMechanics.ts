@@ -1,15 +1,27 @@
 // Imports
 import { coordType, linkedNode } from "../game/snake";
+import Snake from "../game/snake";
 
 // Function for snake motion mechancis
-const snakeMotionMechanics = (newCoord: coordType, snakeHead: linkedNode) => {
-  let prevHeadVal: coordType = snakeHead.data;
-  let start: linkedNode = snakeHead;
-  let tempVal: coordType | null = null;
-  while (start.next !== null) {
-    // next node
-    start = start.next;
+const snakeMotionMechanics = function (
+  snake: Snake,
+  newHeadCoord: coordType
+): Snake {
+  let currentNode: linkedNode = snake.head;
+  let prevNodeCoord: coordType = currentNode.data;
+  while (currentNode.next !== null) {
+    // swapping contents
+    let temp: coordType = currentNode.next.data;
+    currentNode.next.data = prevNodeCoord;
+    prevNodeCoord = temp;
+    // progressing
+    currentNode = currentNode.next;
   }
+  // modifying head
+  snake.head.data = newHeadCoord;
+  // returning new linked list
+  return snake;
 };
 
+// exporting default the function
 export default snakeMotionMechanics;

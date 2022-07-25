@@ -24,6 +24,10 @@ const Navbar = (props: Props) => {
       title: "About",
       href: "/about",
     },
+    {
+      title: "Dev",
+      href: "/dev",
+    },
   ];
   return (
     <Fragment>

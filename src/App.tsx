@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 // importing page components
 import Home from "./Pages/page/Home";
 import About from "./Pages/page/About";
+import Dev from "./Pages/page/Dev";
 import Playground from "./Pages/page/Playground";
 
 // importing Base component
@@ -80,6 +81,31 @@ const App = (props: Props) => {
             ogImage="https://avatars.githubusercontent.com/u/73014428?v=4"
           >
             <About />
+          </Base>
+        }
+      />
+      {/* Dev Route */}
+      <Route
+        path="/dev"
+        element={
+          <Base
+            title="Dev"
+            description="A modern snake game built with React.js that works with the concept of linked-lists. In the game, snake is represented as a linked list with each section of snake's body is represented as a separated linked list node."
+            keywords={[
+              "portfolio project",
+              "personal project",
+              "react.js game",
+              "data-structures",
+              "linked list",
+              "professional project",
+              "Syed Vilayat Ali Rizvi",
+              "Vilayat's projects",
+            ]}
+            ogTitle="Meet the dev : Syed Vilayat Ali Rizvi"
+            ogDescription="Hello 👋! I am Syed Vilayat Ali Rizvi, a passionate programmer who likes to transfer ideas from his mind onto a monitor."
+            ogImage="https://avatars.githubusercontent.com/u/73014428?v=4"
+          >
+            <Dev />
           </Base>
         }
       />

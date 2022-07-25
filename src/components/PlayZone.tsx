@@ -1,5 +1,8 @@
 // importing libaries
 import { useState, useEffect, useCallback, useRef } from "react";
+import Snake from "../game/snake";
+import parser from "../mechanics/Parser";
+import snakeMotionMechanics from "../mechanics/snakeMotionMechanics";
 
 // importing configs
 import config from "../config/app.config";
@@ -19,14 +22,26 @@ const PlayZone = (props: Props) => {
   const [matrixSize, changeMatrixSize] = useState<number[] | null>(
     window.innerWidth < 600 ? null : config.playgroundSize // [ row, column]
   );
+  /// snake state
+  const [snakeState, setSnakeState]: [Snake, any] = useState<Snake>(
+    new Snake()
+  );
+  // grow snake in the UI
+  const growSnakeUI = (coord: { x: number; y: number }): void => {
+    setSnakeState(() => {
+      let newSnakeState = snakeState.growSnake(coord);
+      return newSnakeState;
+    });
+  };
+  const [snakeSignature, setSnakeSignature]: [number[][], any] = useState<
+    number[][]
+  >([]);
+  // update parsed snake array
+  useEffect(() => {
+    setSnakeSignature(parser(snakeState));
+  }, [snakeState]);
   // snake direction
   /// initial direction is straight upward direction
-  const [snakeHeadCoord, setSnakeHeadCoord]: [number[], any] = useState<
-    number[]
-  >([
-    generateRandom(0, config.playgroundSize[0]),
-    generateRandom(0, config.playgroundSize[1]),
-  ]); // [x,y]
   const [snakeDirection, changeSnakeDirection]: [number, any] =
     useState<number>(0); // 0 -> UP 1-> DOWN 2-> LEFT 3-> RIGHT
 
@@ -98,26 +113,22 @@ const PlayZone = (props: Props) => {
         case 0:
           // UP
           setTimeout(() => {
-            setSnakeHeadCoord([snakeHeadCoord[0] - 1, snakeHeadCoord[1]]);
+            setSnakeState(() =>
+              snakeMotionMechanics(snakeState, {
+                x: snakeState.head.data.x - 1,
+                y: snakeState.head.data.y,
+              })
+            );
           }, props.snakeSpeed);
           break;
         case 1:
           // DOWN
-          setTimeout(() => {
-            setSnakeHeadCoord([snakeHeadCoord[0] + 1, snakeHeadCoord[1]]);
-          }, props.snakeSpeed);
           break;
         case 2:
           // LEFT
-          setTimeout(() => {
-            setSnakeHeadCoord([snakeHeadCoord[0], snakeHeadCoord[1] - 1]);
-          }, props.snakeSpeed);
           break;
         case 3:
           // RIGHT
-          setTimeout(() => {
-            setSnakeHeadCoord([snakeHeadCoord[0], snakeHeadCoord[1] + 1]);
-          }, props.snakeSpeed);
           break;
       }
     }
@@ -132,7 +143,8 @@ const PlayZone = (props: Props) => {
               className="w-10 h-10 border border-sky-500"
               key={cellId}
               ref={
-                rowId === snakeHeadCoord[0] && cellId === snakeHeadCoord[1]
+                //  snakeState rowId === snakeHeadCoord[0] && cellId === snakeHeadCoord[1]
+                snakeSignature.indexOf([rowId, cellId]) !== -1
                   ? snakeRef
                   : rowId === food.x && cellId === food.y
                   ? foodRef
