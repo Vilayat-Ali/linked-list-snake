@@ -16,6 +16,9 @@ import {
   Center,
 } from "@chakra-ui/react";
 
+// hooks
+import useWindow from "../../hooks/useWindow";
+
 // config
 import config from "../../config/app.config";
 
@@ -34,6 +37,9 @@ const Home = () => {
     null
   );
 
+  // responsive hook
+  const windowWidth = useWindow();
+
   return (
     <>
       <Head>
@@ -45,34 +51,31 @@ const Home = () => {
 
       <Container
         maxW={"3xl"}
-        style={
-          window.innerWidth < 700 ? { width: "100vw", height: "90vh" } : {}
-        }
+        style={windowWidth < 700 ? { width: "100vw", height: "90vh" } : {}}
       >
         <Stack
           as={Box}
           textAlign={"center"}
           spacing={{ base: 8, md: 14 }}
           py={{ base: 5, md: 12 }}
-          mt={window.innerWidth < 700 ? 10 : 0}
+          mt={windowWidth < 700 ? 10 : 0}
         >
           <Heading
             fontWeight={600}
             fontSize={
-              window.innerWidth < 700
+              windowWidth < 700
                 ? { base: "5xl", sm: "6xl", md: "6xl" }
                 : { base: "2xl", sm: "6xl", md: "6xl" }
             }
             lineHeight={"120%"}
           >
-            Snake Game {window.innerWidth < 700 && <br />} <i>using</i>{" "}
-            {window.innerWidth < 700 && <br />}{" "}
-            {window.innerWidth > 700 && <br />}
+            Snake Game {windowWidth < 700 && <br />} <i>using</i>{" "}
+            {windowWidth < 700 && <br />} {windowWidth > 700 && <br />}
             <Text as={"span"} color={"green.400"}>
               <b>Linked List</b>
             </Text>
           </Heading>
-          <Text color={"gray.500"} top={window.innerWidth < 700 ? 20 : 0}>
+          <Text color={"gray.500"} top={windowWidth < 700 ? 20 : 0}>
             I have implemented the concept of linked list into a fun project,
             proving that linked lists are a lot of fun!
           </Text>
@@ -82,12 +85,12 @@ const Home = () => {
 
           <Center>
             <Box
-              display={window.innerWidth > 600 ? "flex" : "block"}
+              display={windowWidth > 600 ? "flex" : "block"}
               flexDirection="column"
               justifyContent="center"
               alignItems="center"
             >
-              <Box mt={"12px"} width={window.innerWidth > 700 ? 500 : 300}>
+              <Box mt={"12px"} width={windowWidth > 700 ? 500 : 300}>
                 <Text color={"gray.400"} sx={{ margin: "12px auto" }}>
                   Version{" "}
                   <Text
@@ -103,7 +106,7 @@ const Home = () => {
                   </Text>
                 </Text>
                 <Stack
-                  direction={window.innerWidth > 700 ? "row" : "column"}
+                  direction={windowWidth > 700 ? "row" : "column"}
                   align={"center"}
                   spacing={4}
                 >
@@ -162,7 +165,7 @@ const Home = () => {
             align={"center"}
             alignSelf={"center"}
             position={"relative"}
-            top={window.innerWidth < 700 ? 10 : 0}
+            top={windowWidth < 700 ? 10 : 0}
           >
             <Link to="/play">
               <Button

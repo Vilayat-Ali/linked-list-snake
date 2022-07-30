@@ -4,12 +4,17 @@ import { Text } from "@chakra-ui/react";
 import Logo from "../assets/logo.png";
 import { Link, useLocation } from "react-router-dom";
 
+// importing hooks
+import useWindow from "../hooks/useWindow";
+
 type Props = {};
 
 const Navbar = (props: Props) => {
   // toggle custom hook
   const [navState, ToggleNav] = useState<Boolean>(false);
   const location = useLocation();
+  // hooks
+  const windowWidth = useWindow();
   // list of links
   const links = [
     {
@@ -83,13 +88,12 @@ const Navbar = (props: Props) => {
                     <Text
                       sx={{ textDecoration: "none" }}
                       bgColor={
-                        window.innerWidth < 700 &&
-                        location.pathname === link.href
+                        windowWidth < 700 && location.pathname === link.href
                           ? "green.500"
                           : ""
                       }
                       color={
-                        window.innerWidth < 700
+                        windowWidth < 700
                           ? location.pathname === link.href
                             ? "white"
                             : "gray.500"
@@ -97,7 +101,7 @@ const Navbar = (props: Props) => {
                           ? "green.500"
                           : "gray.500"
                       }
-                      fontSize={window.innerWidth > 700 ? "1.25vw" : "5vw"}
+                      fontSize={windowWidth > 700 ? "1.25vw" : "5vw"}
                       p={2}
                       onClick={() => ToggleNav(!navState)}
                     >

@@ -1,5 +1,5 @@
 // Libraries
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 
 // ui
 
@@ -15,7 +15,7 @@ const Playground = (props: Props) => {
   const [isGamePaused, pauseGame]: [boolean, any] = useState<boolean>(true);
   const [snakeSpeed, setSnakeSpeed]: [number, any] = useState<number>(1000);
   const [snakeColor, setSnakeColor]: [string, any] = useState<string>("");
-  const [score, changeScore]: [number, any] = useState<number>(0);
+  const [score, setScore]: [number, any] = useState<number>(0);
 
   return (
     <Fragment>
@@ -24,6 +24,7 @@ const Playground = (props: Props) => {
           <div className="d-flex">
             <Sidebar
               isGamePaused={isGamePaused}
+              gameScore={score}
               pauseGameFunc={pauseGame}
               snakeSpeedFunc={setSnakeSpeed}
               snakeColorFunc={setSnakeColor}
@@ -32,6 +33,7 @@ const Playground = (props: Props) => {
           <div className="d-flex ">
             <PlayZone
               isGamePaused={isGamePaused}
+              scoreFunc={setScore}
               snakeSpeed={snakeSpeed}
               snakeColor={snakeColor}
             />

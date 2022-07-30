@@ -13,6 +13,7 @@ import spawnFood from "../game/food";
 
 type Props = {
   isGamePaused: boolean;
+  scoreFunc: any;
   snakeSpeed: number;
   snakeColor: string;
 };
@@ -98,10 +99,10 @@ const PlayZone = (props: Props) => {
 
   // making things go visible
   useEffect(() => {
-    // food
-    foodRef.current.style.backgroundColor = food.color;
-    // snake
-    snakeRef.current.style.backgroundColor = "green";
+    // // food
+    // foodRef.current.style.backgroundColor = "red";
+    // // snake
+    // snakeRef.current.style.backgroundColor = "green";
     // box
     boxRef.current.style.backgroundColor = "";
   });
@@ -144,11 +145,7 @@ const PlayZone = (props: Props) => {
               key={cellId}
               ref={
                 //  snakeState rowId === snakeHeadCoord[0] && cellId === snakeHeadCoord[1]
-                snakeSignature.indexOf([rowId, cellId]) !== -1
-                  ? snakeRef
-                  : rowId === food.x && cellId === food.y
-                  ? foodRef
-                  : boxRef
+                boxRef
               }
             ></div>
           ))}
