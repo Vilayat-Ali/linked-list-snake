@@ -1,9 +1,15 @@
 // importing react hooks
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Badge, Stack } from "@chakra-ui/react";
 
+// impoting hooks
+import useWindow from "../../hooks/useWindow";
+
+// importing types
+import type { Tag } from "../../Pages/page/Playground";
+
 type Props = {
-  moveList: { x: number; y: number }[];
+  tagList: Tag[];
 };
 
 export interface coordinate {
@@ -40,9 +46,11 @@ const giveBadge = (message: string, type: string, key: any): any => {
 };
 
 const MoveSideBar = (props: Props) => {
+  // hook
+  const windowWidth = useWindow();
   // state
   const [isMoveSideBarOpen, setMoveSideBarStatus] = useState<Boolean>(
-    window.innerWidth < 600 ? false : true
+    windowWidth > 600 ? false : true
   );
 
   return (
@@ -57,12 +65,8 @@ const MoveSideBar = (props: Props) => {
     >
       <div className="overflow-y-auto py-4 px-3">
         <Stack direction="column">
-          {props.moveList.map((move: coordinate, index: any): any =>
-            giveBadge(
-              `SNAKE HEAD AT CO_ORD: (${move.x.toString()}, ${move.y.toString()})`,
-              "move",
-              index
-            )
+          {props.tagList.map((tag: any, index: any) =>
+            giveBadge(tag.message, tag.type, index)
           )}
         </Stack>
       </div>

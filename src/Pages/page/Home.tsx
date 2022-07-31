@@ -111,7 +111,6 @@ const Home = () => {
                   spacing={4}
                 >
                   <Select
-                    placeholder="Select option"
                     onChange={(e) => {
                       e.preventDefault();
                       setGithubLink(e.target.value);

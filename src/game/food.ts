@@ -6,16 +6,21 @@ export interface spawnFoodReturnType {
   color: string;
 }
 
+// generate random color
+const randomHexColorCode = (): string => {
+  let n = (Math.random() * 0xfffff * 1000000).toString(16);
+  return "#" + n.slice(0, 6);
+};
+
 // spawn food in playground arena at random locations
 const spawnFood = (): spawnFoodReturnType => {
   /// possible range of food colors
-  const colorSet: string[] = ["#000", "#021021", "blue", "teal", "purple"];
   const food: spawnFoodReturnType = {
     coord: {
       x: generateRandom(0, config.playgroundSize[0]),
       y: generateRandom(0, config.playgroundSize[1]),
     },
-    color: colorSet[generateRandom(0, colorSet.length - 1)],
+    color: randomHexColorCode(),
   };
   return food;
 };

@@ -18,6 +18,9 @@ import {
   Code,
 } from "@chakra-ui/react";
 
+// importing hooks
+import useWindow from "../../hooks/useWindow";
+
 // importing assets
 import Node from "../../assets/code-snippets/Node.png";
 import Snake from "../../assets/code-snippets/Snake.png";
@@ -44,6 +47,9 @@ const About = (props: Props) => {
   const [isLoading, changeLoadingState]: [boolean, any] =
     useState<boolean>(true);
   const [reaction, setReaction] = useState<any>(); // data fetched from database
+
+  // hook
+  const windowWidth = useWindow();
 
   // useEffect
   useEffect(() => {
@@ -305,8 +311,8 @@ const About = (props: Props) => {
                 fontSize={"md"}
               >
                 <iframe
-                  width={window.innerWidth < 700 ? "380" : "800"}
-                  height={window.innerWidth < 700 ? "315" : "360"}
+                  width={windowWidth < 700 ? "380" : "800"}
+                  height={windowWidth < 700 ? "315" : "360"}
                   src="https://www.youtube.com/embed/7Rkib_fvowE"
                   title="YouTube video player"
                   frameBorder="0"
@@ -329,7 +335,7 @@ const About = (props: Props) => {
           </Text>
           <Box
             display="flex"
-            flexDirection={window.innerWidth < 700 ? "column" : "row"}
+            flexDirection={windowWidth < 700 ? "column" : "row"}
             justifyContent="space-evenly"
             alignItems="center"
           >
@@ -375,10 +381,7 @@ const About = (props: Props) => {
           >
             Approach
           </Text>
-          <Box
-            className="shadow"
-            width={window.innerWidth < 700 ? "98vw" : "90%"}
-          >
+          <Box className="shadow" width={windowWidth < 700 ? "98vw" : "90%"}>
             <Text width="inherit" p={8} textAlign="justify">
               <Highlight
                 query={["Linked List"]}
@@ -408,7 +411,7 @@ const About = (props: Props) => {
             <img
               src={Node}
               style={
-                window.innerWidth < 700
+                windowWidth < 700
                   ? { width: "inherit", height: "auto" }
                   : { width: "40vw", height: "auto", margin: "0 auto" }
               }
@@ -422,7 +425,7 @@ const About = (props: Props) => {
             <img
               src={Snake}
               style={
-                window.innerWidth < 700
+                windowWidth < 700
                   ? { width: "inherit", height: "auto" }
                   : { width: "40vw", height: "auto", margin: "0 auto" }
               }
@@ -437,7 +440,7 @@ const About = (props: Props) => {
             <img
               src={linkedListDiagram}
               style={
-                window.innerWidth < 700
+                windowWidth < 700
                   ? { width: "inherit", height: "auto" }
                   : { width: "40vw", height: "auto", margin: "0 auto" }
               }
@@ -454,7 +457,7 @@ const About = (props: Props) => {
             <img
               src={PlayArea}
               style={
-                window.innerWidth < 700
+                windowWidth < 700
                   ? { width: "inherit", height: "auto" }
                   : { width: "40vw", height: "auto", margin: "0 auto" }
               }

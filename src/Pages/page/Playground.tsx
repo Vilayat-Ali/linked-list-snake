@@ -1,5 +1,6 @@
 // Libraries
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import randomGen from "../../game/randomGen";
 
 // ui
 
@@ -7,6 +8,17 @@ import { Fragment, useState } from "react";
 import Sidebar from "../../components/Sidebar/PlayZoneSideBar";
 import MoveSideBar from "../../components/Sidebar/MoveSideBar";
 import PlayZone from "../../components/PlayZone";
+
+// importing hooks
+import useWindow from "../../hooks/useWindow";
+
+// types
+
+// move bar
+export type Tag = {
+  message: string;
+  type: string;
+};
 
 type Props = {};
 
@@ -16,10 +28,15 @@ const Playground = (props: Props) => {
   const [snakeSpeed, setSnakeSpeed]: [number, any] = useState<number>(1000);
   const [snakeColor, setSnakeColor]: [string, any] = useState<string>("");
   const [score, setScore]: [number, any] = useState<number>(0);
+  const [moveList, setMoveList]: [Tag[], any] = useState<Tag[]>([]);
+  const [showCoord, setShowingCoord]: [boolean, any] = useState<boolean>(false);
+
+  // use window hook
+  const windowWidth = useWindow();
 
   return (
     <Fragment>
-      {window.innerWidth > 700 ? (
+      {windowWidth > 700 ? (
         <div className="flex items-center">
           <div className="d-flex">
             <Sidebar
@@ -28,6 +45,8 @@ const Playground = (props: Props) => {
               pauseGameFunc={pauseGame}
               snakeSpeedFunc={setSnakeSpeed}
               snakeColorFunc={setSnakeColor}
+              showCoordFunc={setShowingCoord}
+              showCoord={showCoord}
             />
           </div>
           <div className="d-flex ">
@@ -36,26 +55,13 @@ const Playground = (props: Props) => {
               scoreFunc={setScore}
               snakeSpeed={snakeSpeed}
               snakeColor={snakeColor}
+              tagListFunc={setMoveList}
+              tagList={moveList}
+              showCoord={showCoord}
             />
           </div>
           <div className="d-flex">
-            <MoveSideBar
-              moveList={[
-                {
-                  x: 4,
-                  y: 4,
-                },
-                {
-                  x: 5,
-                  y: 4,
-                },
-
-                {
-                  x: 6,
-                  y: 4,
-                },
-              ]}
-            />
+            <MoveSideBar tagList={moveList} />
           </div>
         </div>
       ) : (

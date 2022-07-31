@@ -4,14 +4,9 @@ module.exports = {
   // version history
   version_history: [
     {
-      version: "1.0",
+      version: "version 1.0.0",
       github_branch: "master",
       stable: true,
-    },
-    {
-      version: "1.5",
-      github_branch: "version/1.0",
-      stable: false,
     },
   ],
 };

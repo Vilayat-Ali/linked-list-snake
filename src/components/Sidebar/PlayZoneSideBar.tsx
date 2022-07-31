@@ -1,5 +1,5 @@
 // importing react hooks
-import { useState, useEffect } from "react";
+import { useState, memo } from "react";
 import { Helmet } from "react-helmet";
 
 // ui
@@ -16,6 +16,8 @@ import pause from "../../assets/svg/pause.svg";
 import speedometer from "../../assets/svg/speedometer.svg";
 import color from "../../assets/svg/color.svg";
 import instructions from "../../assets/svg/instructions.svg";
+import play from "../../assets/svg/play.svg";
+import pin from "../../assets/svg/pin.svg";
 
 // importing components
 import InputField from "../InputField";
@@ -27,18 +29,14 @@ type Props = {
   pauseGameFunc: any;
   snakeSpeedFunc: any;
   snakeColorFunc: any;
+  showCoordFunc: any;
+  showCoord: boolean;
 };
 
-const SideBar = (props: Props) => {
+const SideBar = memo((props: Props) => {
   // state
   const [isSideBarOpen, setSideBarStatus] = useState<Boolean>(
     window.innerWidth < 600 ? false : true
-  );
-  const [menuInputState, setMenuInputState]: [any, any] = useState<any>(
-    Object.create(null)
-  );
-  const [settingState, setSettingState]: [any, any] = useState<any>(
-    Object.create(null)
   );
 
   // toast
@@ -56,6 +54,10 @@ const SideBar = (props: Props) => {
       icon: pause,
     },
     {
+      option: "View Coordinates",
+      icon: pin,
+    },
+    {
       option: "Set Snake Speed",
       icon: speedometer,
       input: {
@@ -64,15 +66,8 @@ const SideBar = (props: Props) => {
         visibility: true,
       },
       cb: (value: number) => {
-        props.snakeSpeedFunc(value);
         if (value) {
-          toast({
-            title: "Snake speed have been updated",
-            description: `Snake speed have been updated to ${value} units.`,
-            status: "info",
-            duration: 4500,
-            isClosable: true,
-          });
+          props.snakeSpeedFunc(value);
         }
       },
     },
@@ -117,6 +112,9 @@ const SideBar = (props: Props) => {
           duration: 4500,
           isClosable: true,
         });
+        break;
+      case "View Coordinates":
+        props.showCoordFunc(!props.showCoord);
         break;
       case "Game Instructions":
         onOpen();
@@ -176,7 +174,7 @@ const SideBar = (props: Props) => {
             {listOptions.map((listOption, index) => (
               <li
                 key={index}
-                className="hover:bg-gray-200"
+                className=""
                 onClick={() => {
                   handleOnClick(listOption.option);
                 }}
@@ -205,6 +203,6 @@ const SideBar = (props: Props) => {
       </aside>
     </>
   );
-};
+});
 
 export default SideBar;
