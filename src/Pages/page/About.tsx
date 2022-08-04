@@ -1,5 +1,5 @@
 // importing react hooks
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
 import {
   Box,
@@ -18,6 +18,8 @@ import {
   Code,
 } from "@chakra-ui/react";
 
+// importing packages
+
 // importing hooks
 import useWindow from "../../hooks/useWindow";
 
@@ -32,6 +34,10 @@ import React from "../../assets/tech/react.png";
 import TypeScript from "../../assets/tech/typescript.png";
 import Firebase from "../../assets/tech/firebase.jpg";
 import Chakra from "../../assets/tech/chakra.png";
+import Tailwind from "../../assets/tech/tailwindcss.png";
+
+// importing components
+import CardCarousel from "../../components/carousel/CardCarousel";
 
 // firebase
 import { db } from "../../firebase";
@@ -193,7 +199,7 @@ const About = (props: Props) => {
                 fontFamily={"'Hahmlet', serif"}
                 p={4}
               >
-                Insights
+                Vote this project
               </Text>
               <Grid
                 templateRows="repeat(2, 1fr)"
@@ -219,9 +225,7 @@ const About = (props: Props) => {
                           ? `${reaction.LovedIt / 1000}K`
                           : reaction.LovedIt}
                       </StatNumber>
-                      <StatHelpText>
-                        Loved and enjoyed this project!
-                      </StatHelpText>
+                      <StatHelpText>Loved it!</StatHelpText>
                     </Stat>
                   </GridItem>
                 </Tooltip>
@@ -243,7 +247,7 @@ const About = (props: Props) => {
                           ? `${reaction.AppreciatedEffort / 1000}K`
                           : reaction.AppreciatedEffort}
                       </StatNumber>
-                      <StatHelpText>Appreciated the effort!</StatHelpText>
+                      <StatHelpText>Appreciated !</StatHelpText>
                     </Stat>
                   </GridItem>
                 </Tooltip>
@@ -265,7 +269,7 @@ const About = (props: Props) => {
                           ? `${reaction.AcknowledgedIt / 1000}K`
                           : reaction.AcknowledgedIt}
                       </StatNumber>
-                      <StatHelpText>Acknowledged the idea!</StatHelpText>
+                      <StatHelpText>Acknowledged !</StatHelpText>
                     </Stat>
                   </GridItem>
                 </Tooltip>
@@ -287,7 +291,7 @@ const About = (props: Props) => {
                           ? `${reaction.FoundItUnique / 1000}K`
                           : reaction.FoundItUnique}
                       </StatNumber>
-                      <StatHelpText>Found this project as unique!</StatHelpText>
+                      <StatHelpText>Unique !</StatHelpText>
                     </Stat>
                   </GridItem>
                 </Tooltip>
@@ -295,16 +299,9 @@ const About = (props: Props) => {
             </Box>
           )}
 
-          {/* Inspiration */}
+          {/* Tech Stack */}
           <Box p={{ base: 4, md: 8 }}>
-            <Text
-              fontSize={{ base: "8vw", md: "2vw" }}
-              textAlign="center"
-              fontFamily={"'Hahmlet', serif"}
-              p={4}
-            >
-              Inspiration
-            </Text>
+            {/*
             <Center>
               <Tooltip
                 label="Clement's this video is the soul inspiration behind this project"
@@ -320,51 +317,49 @@ const About = (props: Props) => {
                   allowFullScreen
                 ></iframe>
               </Tooltip>
-            </Center>
-          </Box>
-        </Box>
-        {/* Tech Stack */}
-        <Box>
-          <Text
-            fontSize={{ base: "8vw", md: "2vw" }}
-            textAlign="center"
-            fontFamily={"'Hahmlet', serif"}
-            p={4}
-          >
-            Tech Stack
-          </Text>
-          <Box
-            display="flex"
-            flexDirection={windowWidth < 700 ? "column" : "row"}
-            justifyContent="space-evenly"
-            alignItems="center"
-          >
-            <img
-              src={React}
-              alt="react.js-logo-img"
-              width={"200vw"}
-              style={{ margin: "2vw auto" }}
-            />
-            <img
-              src={Chakra}
-              alt="chakra-logo-img"
-              width={"200vw"}
-              style={{ margin: "2vw auto" }}
-            />
-            <img
-              src={TypeScript}
-              alt="typescript-logo-img"
-              width={"200vw"}
-              style={{ margin: "2vw auto" }}
-            />
-            <img
-              src={Firebase}
-              alt="firebase-logo-img"
-              width={"200vw"}
-              style={{ margin: "2vw auto" }}
+            </Center> */}
+            <CardCarousel
+              carouselItems={[
+                {
+                  title: "TypeScript",
+                  image: TypeScript,
+                  description:
+                    "Typescript is superset of javascript. Essentially used to overcome some weird bugs that is encountered occassionally while using traditional JavaScript.",
+                  rating: 5,
+                },
+                {
+                  title: "Firebase",
+                  image: Firebase,
+                  description:
+                    "Firebase is Google's platform for deploying your websites, essentially SPAs.",
+                  rating: 3,
+                },
+                {
+                  title: "React",
+                  image: React,
+                  description:
+                    "React is a JavaScript library used for creating inituitive user interfaces. React is the most famous JS library ever since it's creation by Facebook Inc. on May 29, 2013.",
+                  rating: 5,
+                },
+                {
+                  title: "Chakra UI",
+                  image: Chakra,
+                  description:
+                    "Chakra UI is a JavaScript library that contains react components and meant to make frontend development hassle-free.",
+                  rating: 4,
+                },
+                {
+                  title: "TailwindCSS",
+                  image: Tailwind,
+                  description:
+                    "Chakra UI is a JavaScript library that contains react components and meant to make frontend development hassle-free.",
+                  rating: 5,
+                },
+              ]}
             />
           </Box>
         </Box>
+
         {/* Approach */}
         <Box
           display="flex"

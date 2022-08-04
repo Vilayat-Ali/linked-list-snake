@@ -1,8 +1,6 @@
 // Libraries
 import { Fragment, useEffect, useState } from "react";
-import randomGen from "../../game/randomGen";
-
-// ui
+import { Link } from "react-router-dom";
 
 // importing components
 import Sidebar from "../../components/Sidebar/PlayZoneSideBar";
@@ -73,13 +71,14 @@ const Playground = (props: Props) => {
             <p className="text-3xl">
               Please use a desktop device to view playground.
             </p>
-            <a
-              rel="noopener noreferrer"
-              href="/home"
-              className="px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900"
-            >
-              Revert back to home
-            </a>
+            <Link to="/">
+              <a
+                rel="noopener noreferrer"
+                className="px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900"
+              >
+                Revert back to home
+              </a>
+            </Link>
           </div>
         </section>
       )}
