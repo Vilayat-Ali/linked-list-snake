@@ -178,19 +178,20 @@ const About = (props: Props) => {
           display="flex"
           flexDirection={{ base: "column", md: "row" }}
           justifyContent="space-evenly"
-          alignItems="center"
           px={{ base: 2, md: 5 }}
-          my={4}
+          my={2}
         >
           {/* Insights */}
           {isLoading ? (
-            <Spinner
-              thickness="4px"
-              speed="0.65s"
-              emptyColor="gray.200"
-              color="blue.500"
-              size="xl"
-            />
+            <Center>
+              <Spinner
+                thickness="4px"
+                speed="0.65s"
+                emptyColor="gray.200"
+                color="blue.500"
+                size="xl"
+              />
+            </Center>
           ) : (
             <Box p={{ base: 4, md: 8 }}>
               <Text
@@ -301,6 +302,14 @@ const About = (props: Props) => {
 
           {/* Tech Stack */}
           <Box p={{ base: 4, md: 8 }}>
+            <Text
+              fontSize={{ base: "8vw", md: "2vw" }}
+              textAlign="center"
+              fontFamily={"'Hahmlet', serif"}
+              p={4}
+            >
+              Tech Stack
+            </Text>
             {/*
             <Center>
               <Tooltip
