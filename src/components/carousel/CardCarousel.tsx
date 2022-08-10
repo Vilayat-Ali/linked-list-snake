@@ -24,7 +24,7 @@ const CardCarousel = ({ carouselItems }: Props) => {
     setCardCount(cardCount - 1 >= 0 ? cardCount - 1 : carouselItems.length - 1);
   };
   return (
-    <Box>
+    <Box sx={{ margin: "0 auto" }}>
       {/* Screen */}
       <TechFeatureCard
         title={carouselItems[cardCount].title}
