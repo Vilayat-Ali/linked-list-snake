@@ -118,6 +118,8 @@ const Testimonials = (props: propType) => {
         </Stack>
         <Stack
           direction="row"
+          alignItems="center"
+          justifyContent="center"
           spacing={{ base: 10, md: 4, lg: 10 }}
           sx={{
             overflowX: "scroll",

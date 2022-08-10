@@ -195,39 +195,6 @@ const Dev = (props: Props) => {
               </a>
             </div>
           </div>
-          <div className="px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36 mt-12">
-            <span className="font-semibold text-gray-400 uppercase mb-2">
-              have worked in
-            </span>
-            <Box
-              display="flex"
-              flexDirection={{ base: "column", md: "row" }}
-              alignItems="center"
-              justifyContent="center"
-            >
-              {work_experience.map(
-                (
-                  company: {
-                    company_logo: string;
-                    company_website_link: string;
-                  },
-                  index: any
-                ) => (
-                  <a
-                    href={company.company_website_link}
-                    className="mx-2 mb-5 lg:mb-0 hover:text-gray-800"
-                    key={index}
-                  >
-                    <img
-                      src={company.company_logo}
-                      style={{ width: "60%" }}
-                      alt="devmonk.io-logo"
-                    />
-                  </a>
-                )
-              )}
-            </Box>
-          </div>
         </div>
       </section>
       {/* Hero */}
