@@ -28,12 +28,12 @@ const FeatureCard = (props: Props) => {
   return (
     <Fragment>
       {windowWidth <= 700 ? (
-        <Box className="shadow p-5" style={{ width: "90vw" }} ref={cardRef}>
+        <Box className="shadow p-4" style={{ width: "80vw" }} ref={cardRef}>
           {/* Mobile View */}
           <Box>
             <img
               src={props.image}
-              style={{ width: "86vw", height: "90vw", objectFit: "contain" }}
+              style={{ width: "80vw", height: "80vw", objectFit: "contain" }}
               alt="tech-image"
             />
           </Box>
