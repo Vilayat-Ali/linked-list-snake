@@ -60,7 +60,7 @@ const FeatureCard = (props: Props) => {
             <img
               src={props.image}
               style={{ width: "40vw", height: "20vw", objectFit: "contain" }}
-              className="shadow px-4"
+              className="px-4"
               alt="tech-image"
             />
           </Box>
