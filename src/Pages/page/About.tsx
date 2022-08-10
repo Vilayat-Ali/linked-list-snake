@@ -361,7 +361,7 @@ const About = (props: Props) => {
                   title: "TailwindCSS",
                   image: Tailwind,
                   description:
-                    "Chakra UI is a JavaScript library that contains react components and meant to make frontend development hassle-free.",
+                    "TailwindCSS is a library of utility style-classes. It enables you style your apps without writing legit CSS.",
                   rating: 5,
                 },
               ]}
