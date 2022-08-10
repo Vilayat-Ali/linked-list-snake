@@ -64,13 +64,13 @@ const Footer = () => {
         </Text>
         <Stack direction={"row"} spacing={6}>
           <SocialButton label={"Twitter"} href={"#"}>
-            <FaTwitter />
+            <FaTwitter className="hover:text-green-600" />
           </SocialButton>
-          <SocialButton label={"YouTube"} href={"#"}>
-            <FaYoutube />
+          <SocialButton label={"YouTube"} href={"https://www.youtube.com"}>
+            <FaYoutube className="hover:text-green-600" />
           </SocialButton>
           <SocialButton label={"Instagram"} href={"#"}>
-            <FaInstagram />
+            <FaInstagram className="hover:text-green-600" />
           </SocialButton>
         </Stack>
       </Container>
