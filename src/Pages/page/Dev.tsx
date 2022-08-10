@@ -1,24 +1,37 @@
 // Libraries
+import { Fragment } from "react";
 
 // UI
 import { Box, Text } from "@chakra-ui/react";
 
+// components
+import Testimonials from "../../components/Testimonials";
+
+// assets
+import devmonk from "../../assets/logo/devmonk.png";
+import nonceblox from "../../assets/logo/nonceblox.png";
+
 type Props = {};
 
 const Dev = (props: Props) => {
+  // states
+  const work_experience = [
+    {
+      company_logo: devmonk,
+      company_website_link: "https://www.devmonk.io",
+    },
+    {
+      company_logo: nonceblox,
+      company_website_link: "https://www.nonceblox.com",
+    },
+  ];
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      sx={{ width: "100vw" }}
-    >
+    <Fragment>
       {/* Hero Section */}
-      <section className="bg-white">
+      <section className="bg-white my-2">
         <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
           <a
-            href="#"
+            href="https://www.linkedin.com/in/syed-vilayat-ali-rizvi"
             className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full  hover:bg-gray-200 "
             role="alert"
           >
@@ -26,7 +39,7 @@ const Dev = (props: Props) => {
               New
             </span>{" "}
             <span className="text-sm font-medium">
-              Flowbite is out! See what's new
+              Hire the developer at Linkedin
             </span>
             <svg
               className="ml-2 w-5 h-5"
@@ -42,18 +55,17 @@ const Dev = (props: Props) => {
             </svg>
           </a>
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl ">
-            We invest in the world’s potential
+            Syed Vilayat Ali Rizvi
           </h1>
           <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-            Here at Flowbite we focus on markets where technology, innovation,
-            and capital can unlock long-term value and drive economic growth.
+            One Crazy Heck of a Developer!
           </p>
           <div className="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
             <a
-              href="#"
+              href="https://www.github.com/Vilayat-Ali"
               className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
             >
-              Learn more
+              Github
               <svg
                 className="ml-2 -mr-1 w-5 h-5"
                 fill="currentColor"
@@ -69,7 +81,7 @@ const Dev = (props: Props) => {
             </a>
             <a
               href="#"
-              className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100  dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+              className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 "
             >
               <svg
                 className="mr-2 -ml-1 w-5 h-5"
@@ -84,12 +96,12 @@ const Dev = (props: Props) => {
           </div>
           <div className="px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
             <span className="font-semibold text-gray-400 uppercase">
-              FEATURED IN
+              Follow me at
             </span>
             <div className="flex flex-wrap justify-center items-center mt-8 text-gray-500 sm:justify-between">
               <a
-                href="#"
-                className="mr-5 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-400"
+                href="https://www.youtube.com"
+                className="mr-5 mb-5 lg:mb-0 hover:text-gray-800 "
               >
                 <svg
                   className="h-8"
@@ -135,10 +147,7 @@ const Dev = (props: Props) => {
                   />
                 </svg>
               </a>
-              <a
-                href="#"
-                className="mr-5 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-400"
-              >
+              <a href="#" className="mr-5 mb-5 lg:mb-0 hover:text-gray-800 ">
                 <svg
                   className="h-11"
                   viewBox="0 0 208 42"
@@ -159,10 +168,7 @@ const Dev = (props: Props) => {
                   />
                 </svg>
               </a>
-              <a
-                href="#"
-                className="mr-5 mb-5 lg:mb-0 hover:text-gray-800 dark:hover:text-gray-400"
-              >
+              <a href="#" className="mr-5 mb-5 lg:mb-0 hover:text-gray-800 ">
                 <svg
                   className="h-11"
                   viewBox="0 0 120 41"
@@ -189,9 +195,58 @@ const Dev = (props: Props) => {
               </a>
             </div>
           </div>
+          <div className="px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36 mt-12">
+            <span className="font-semibold text-gray-400 uppercase mb-2">
+              have worked in
+            </span>
+            <Box
+              display="flex"
+              flexDirection={{ base: "column", md: "row" }}
+              alignItems="center"
+              justifyContent="center"
+            >
+              {work_experience.map(
+                (
+                  company: {
+                    company_logo: string;
+                    company_website_link: string;
+                  },
+                  index: any
+                ) => (
+                  <a
+                    href={company.company_website_link}
+                    className="mx-2 mb-5 lg:mb-0 hover:text-gray-800"
+                    key={index}
+                  >
+                    <img
+                      src={company.company_logo}
+                      style={{ width: "60%" }}
+                      alt="devmonk.io-logo"
+                    />
+                  </a>
+                )
+              )}
+            </Box>
+          </div>
         </div>
       </section>
-    </Box>
+      {/* Hero */}
+
+      {/* Testimonials */}
+      <Testimonials
+        testimonials={[
+          {
+            title: "Example Title",
+            message:
+              "I am so good at React.js and Next.js that I can be anything!",
+            image: "https://www.github.com/Vilayat-Ali.png",
+            name: "Vilayat Ali",
+            position: "BlockChain Engineer",
+          },
+        ]}
+      />
+      {/* Testimonials */}
+    </Fragment>
   );
 };
 
