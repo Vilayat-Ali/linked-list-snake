@@ -25,6 +25,18 @@ const Dev = (props: Props) => {
       company_website_link: "https://www.nonceblox.com",
     },
   ];
+
+  // testimonials
+  const testimonials_of_reviewers = [
+    {
+      title: "Mind-Blowing",
+      message:
+        "The concept.... The idea.... The execution is all perfect. I'm wondering how someone can literally 'play' with linked-lists so happily.",
+      name: "Muntazir Rashid",
+      image: "https://www.github.com/muntazirrashid.png",
+      position: "Full-Stack Engineer",
+    },
+  ];
   return (
     <Fragment>
       {/* Hero Section */}
@@ -35,7 +47,7 @@ const Dev = (props: Props) => {
             className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full  hover:bg-gray-200 "
             role="alert"
           >
-            <span className="text-xs bg-primary-600 rounded-full text-white px-4 py-1.5 mr-3">
+            <span className="text-xs bg-green-500 rounded-full text-white px-4 py-1.5 mr-3">
               New
             </span>{" "}
             <span className="text-sm font-medium">
@@ -58,12 +70,12 @@ const Dev = (props: Props) => {
             Syed Vilayat Ali Rizvi
           </h1>
           <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-            One Crazy Heck of a Developer!
+            One crazy heck of an engineer!
           </p>
           <div className="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
             <a
               href="https://www.github.com/Vilayat-Ali"
-              className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
+              className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-green-500 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
             >
               Github
               <svg
@@ -99,12 +111,13 @@ const Dev = (props: Props) => {
               Follow me at
             </span>
             <div className="flex flex-wrap justify-center items-center mt-8 text-gray-500 sm:justify-between">
+              {/* Youtube */}
               <a
                 href="https://www.youtube.com"
                 className="mr-5 mb-5 lg:mb-0 hover:text-gray-800 "
               >
                 <svg
-                  className="h-8"
+                  className="h-8 hover:text-red-600"
                   viewBox="0 0 132 29"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -147,9 +160,13 @@ const Dev = (props: Props) => {
                   />
                 </svg>
               </a>
-              <a href="#" className="mr-5 mb-5 lg:mb-0 hover:text-gray-800 ">
+              {/* Product Hunt */}
+              <a
+                href="https://www.producthunt.com/@syed_vilayat_ali_rizvi"
+                className="mr-5 mb-5 lg:mb-0 hover:text-gray-800 "
+              >
                 <svg
-                  className="h-11"
+                  className="h-11 hover:text-orange-500"
                   viewBox="0 0 208 42"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -168,9 +185,13 @@ const Dev = (props: Props) => {
                   />
                 </svg>
               </a>
-              <a href="#" className="mr-5 mb-5 lg:mb-0 hover:text-gray-800 ">
+              {/* Reddit */}
+              <a
+                href="https://www.reddit.com/user/Vilayat_Ali"
+                className="mr-5 mb-5 lg:mb-0 hover:text-gray-800 "
+              >
                 <svg
-                  className="h-11"
+                  className="h-11 hover:text-orange-600"
                   viewBox="0 0 120 41"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -200,18 +221,7 @@ const Dev = (props: Props) => {
       {/* Hero */}
 
       {/* Testimonials */}
-      <Testimonials
-        testimonials={[
-          {
-            title: "Example Title",
-            message:
-              "I am so good at React.js and Next.js that I can be anything!",
-            image: "https://www.github.com/Vilayat-Ali.png",
-            name: "Vilayat Ali",
-            position: "BlockChain Engineer",
-          },
-        ]}
-      />
+      <Testimonials testimonials={testimonials_of_reviewers} />
       {/* Testimonials */}
     </Fragment>
   );

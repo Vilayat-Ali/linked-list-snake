@@ -110,8 +110,8 @@ const Testimonials = (props: propType) => {
     <Box bg={useColorModeValue("gray.100", "gray.700")}>
       <Container maxW={"7xl"} py={16} as={Stack} spacing={12}>
         <Stack spacing={0} align={"center"}>
-          <Heading>Recent Project Reviews</Heading>
-          <Text>
+          <Heading>Reviews</Heading>
+          <Text textAlign="center" className="my-2">
             There is another level of satisfaction involved when reading through
             these feedbacks!
           </Text>
