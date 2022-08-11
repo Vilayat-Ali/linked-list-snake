@@ -25,9 +25,17 @@ const Playground = (props: Props) => {
   const [isGamePaused, pauseGame]: [boolean, any] = useState<boolean>(true);
   const [snakeSpeed, setSnakeSpeed]: [number, any] = useState<number>(1000);
   const [snakeColor, setSnakeColor]: [string, any] = useState<string>("");
-  const [score, setScore]: [number, any] = useState<number>(0);
+  const [score, setScore]: [number, any] = useState<number>(1);
   const [moveList, setMoveList]: [Tag[], any] = useState<Tag[]>([]);
   const [showCoord, setShowingCoord]: [boolean, any] = useState<boolean>(false);
+
+  // increasing score
+  useEffect(() => {
+    var scoreInterval = setInterval(() => {
+      setScore((score: number) => score + 1);
+    }, 800);
+    return () => clearInterval(scoreInterval);
+  }, []);
 
   // use window hook
   const windowWidth = useWindow();

@@ -1,6 +1,6 @@
 // importing libaries
 import { useState, useEffect, useCallback, useRef } from "react";
-import Snake from "../game/snake";
+import Snake, { coordType, linkedNode } from "../game/snake";
 import parser from "../mechanics/Parser";
 import snakeMotionMechanics from "../mechanics/snakeMotionMechanics";
 
@@ -39,20 +39,11 @@ const PlayZone = (props: Props) => {
       return newSnakeState;
     });
   };
-  // snake signature
-  const [snakeSignature, setSnakeSignature]: [number[][], any] = useState<
-    number[][]
-  >(parser(snakeState));
-  const existsInSnakeSignature = (search: number) => {
-    return snakeSignature.some((signatureCell) =>
-      signatureCell.includes(search)
-    );
-  };
 
   // snake direction
   /// initial direction is straight upward direction
   const [snakeDirection, changeSnakeDirection]: [number, any] =
-    useState<number>(0); // 0 -> UP 1-> DOWN 2-> LEFT 3-> RIGHT
+    useState<number>(2); // 0 -> UP 1-> DOWN 2-> LEFT 3-> RIGHT
 
   // food
   const [food, newFoodLocation]: [
@@ -98,44 +89,19 @@ const PlayZone = (props: Props) => {
   const foodRef = useRef<any>();
   const boxRef = useRef<any>();
 
-  // game start useEffect
-  // useEffect(() => {
-  //   // spawn food and display it to moveSideBar
-  //   spawnFoodInPlayZone();
-  // }, []);
-
-  useEffect(() => {
-    console.log(parser(snakeState));
-    console.log(snakeSignature.includes([]));
-  }, []);
-
   // user controls
   /// function to handle event
   const handleKey = useCallback((event: any): void => {
     switch (event.key) {
+      // LEFT
       case "ArrowLeft":
-        switch (snakeDirection) {
-          case 0:
-            changeSnakeDirection(2);
-            break;
-          case 1:
-            changeSnakeDirection(2);
-            break;
-          case 2:
-            changeSnakeDirection(1);
-            break;
-          case 3:
-            changeSnakeDirection(0);
-            break;
-          default:
-            break;
-        }
+        changeSnakeDirection(2);
+        console.log(snakeDirection);
+        console.log("LEFT");
         break;
+      // RIGHT
       case "ArrowRight":
-        console.log("Right");
         break;
-      default:
-        console.log("Invalid control");
     }
   }, []);
 
@@ -145,42 +111,66 @@ const PlayZone = (props: Props) => {
     return () => document.removeEventListener("keydown", handleKey);
   }, [handleKey]);
 
+  // boundary check
+  const snakeAtBoundary = (targetCoord: { x: number; y: number }) => {
+    if (targetCoord.x === 0 || targetCoord.y === 0) return true; // false // meaning to stop
+  };
+
+  // moving snake forward
+  useEffect(() => {
+    // setting up interval
+    const snakeMovementInterval = setInterval(() => {
+      switch (snakeDirection) {
+        case 0:
+          // fetch new target coord
+          let targetCoord_UP: coordType = {
+            x: snakeState.head.data.x - 1,
+            y: snakeState.head.data.y,
+          };
+          // updating snake motion states
+          snakeMotionMechanics(snakeState, targetCoord_UP);
+          break;
+        case 1:
+          // fetch new target coord
+          let targetCoord_DOWN: coordType = {
+            x: snakeState.head.data.x + 1,
+            y: snakeState.head.data.y,
+          };
+          // updating snake motion states
+          snakeMotionMechanics(snakeState, targetCoord_DOWN);
+          break;
+        case 2:
+          // fetch new target coord
+          let targetCoord_LEFT: coordType = {
+            x: snakeState.head.data.x,
+            y: snakeState.head.data.y - 1,
+          };
+          // updating snake motion states
+          snakeMotionMechanics(snakeState, targetCoord_LEFT);
+          break;
+        case 3:
+          // fetch new target coord
+          let targetCoord_RIGHT: coordType = {
+            x: snakeState.head.data.x,
+            y: snakeState.head.data.y + 1,
+          };
+          // updating snake motion states
+          snakeMotionMechanics(snakeState, targetCoord_RIGHT);
+          break;
+      }
+    }, 600); // 500 is test default
+    // removing interval to prevent memmory leak
+    return () => clearInterval(snakeMovementInterval);
+  }, []);
+
   // making things go visible
   useEffect(() => {
     // food
     foodRef.current.style.backgroundColor = food.color;
     // snake
-    snakeRef.current.style.backgroundColor = "pink";
+    snakeRef.current.style.backgroundColor = props.snakeColor || "#000000";
     // box
     boxRef.current.style.backgroundColor = "";
-  });
-
-  // moving snake
-  useEffect(() => {
-    if (!props.isGamePaused) {
-      switch (snakeDirection) {
-        case 0:
-          // UP
-          setTimeout(() => {
-            setSnakeState(() =>
-              snakeMotionMechanics(snakeState, {
-                x: snakeState.head.data.x - 1,
-                y: snakeState.head.data.y,
-              })
-            );
-          }, props.snakeSpeed);
-          break;
-        case 1:
-          // DOWN
-          break;
-        case 2:
-          // LEFT
-          break;
-        case 3:
-          // RIGHT
-          break;
-      }
-    }
   });
 
   return (
@@ -197,8 +187,8 @@ const PlayZone = (props: Props) => {
               ref={
                 food.x == rowId && food.y == cellId
                   ? foodRef
-                  : existsInSnakeSignature(rowId) &&
-                    existsInSnakeSignature(cellId)
+                  : snakeState.head.data.x === rowId &&
+                    snakeState.head.data.y === cellId
                   ? snakeRef
                   : boxRef
               }

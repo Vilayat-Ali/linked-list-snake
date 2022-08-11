@@ -3,10 +3,7 @@ import { coordType, linkedNode } from "../game/snake";
 import Snake from "../game/snake";
 
 // Function for snake motion mechancis
-const snakeMotionMechanics = function (
-  snake: Snake,
-  newHeadCoord: coordType
-): Snake {
+const snakeMotionMechanics = (snake: Snake, newHeadCoord: coordType): Snake => {
   let currentNode: linkedNode = snake.head;
   let prevNodeCoord: coordType = currentNode.data;
   while (currentNode.next !== null) {
