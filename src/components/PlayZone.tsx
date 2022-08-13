@@ -1,7 +1,6 @@
 // importing libaries
 import { useState, useEffect, useCallback, useRef } from "react";
-import Snake, { coordType, linkedNode } from "../game/snake";
-import parser from "../mechanics/Parser";
+import Snake, { coordType } from "../game/snake";
 import snakeMotionMechanics from "../mechanics/snakeMotionMechanics";
 
 // importing configs
@@ -43,7 +42,7 @@ const PlayZone = (props: Props) => {
   // snake direction
   /// initial direction is straight upward direction
   const [snakeDirection, changeSnakeDirection]: [number, any] =
-    useState<number>(2); // 0 -> UP 1-> DOWN 2-> LEFT 3-> RIGHT
+    useState<number>(0); // 0 -> UP 1-> DOWN 2-> LEFT 3-> RIGHT
 
   // food
   const [food, newFoodLocation]: [
@@ -93,14 +92,33 @@ const PlayZone = (props: Props) => {
   /// function to handle event
   const handleKey = useCallback((event: any): void => {
     switch (event.key) {
+      // UP
+      case "ArrowUp":
+        changeSnakeDirection(0);
+        break;
+      // DOWN
+      case "ArrowDown":
+        changeSnakeDirection(1);
+        break;
       // LEFT
       case "ArrowLeft":
-        changeSnakeDirection(2);
-        console.log(snakeDirection);
-        console.log("LEFT");
+        switch (snakeDirection) {
+          case 1:
+            changeSnakeDirection(3);
+            break;
+          default:
+            changeSnakeDirection(2);
+        }
         break;
       // RIGHT
       case "ArrowRight":
+        switch (snakeDirection) {
+          case 1:
+            changeSnakeDirection(2);
+            break;
+          default:
+            changeSnakeDirection(3);
+        }
         break;
     }
   }, []);
@@ -113,7 +131,13 @@ const PlayZone = (props: Props) => {
 
   // boundary check
   const snakeAtBoundary = (targetCoord: { x: number; y: number }) => {
-    if (targetCoord.x === 0 || targetCoord.y === 0) return true; // false // meaning to stop
+    if (
+      targetCoord.x === -1 ||
+      targetCoord.x === config.playgroundSize[0] ||
+      targetCoord.y === -1 ||
+      targetCoord.y === config.playgroundSize[1]
+    )
+      return true; // false // meaning to stop
   };
 
   // moving snake forward
@@ -128,7 +152,8 @@ const PlayZone = (props: Props) => {
             y: snakeState.head.data.y,
           };
           // updating snake motion states
-          snakeMotionMechanics(snakeState, targetCoord_UP);
+          if (!snakeAtBoundary(targetCoord_UP))
+            snakeMotionMechanics(snakeState, targetCoord_UP);
           break;
         case 1:
           // fetch new target coord
@@ -137,7 +162,8 @@ const PlayZone = (props: Props) => {
             y: snakeState.head.data.y,
           };
           // updating snake motion states
-          snakeMotionMechanics(snakeState, targetCoord_DOWN);
+          if (!snakeAtBoundary(targetCoord_DOWN))
+            snakeMotionMechanics(snakeState, targetCoord_DOWN);
           break;
         case 2:
           // fetch new target coord
@@ -146,7 +172,8 @@ const PlayZone = (props: Props) => {
             y: snakeState.head.data.y - 1,
           };
           // updating snake motion states
-          snakeMotionMechanics(snakeState, targetCoord_LEFT);
+          if (!snakeAtBoundary(targetCoord_LEFT))
+            snakeMotionMechanics(snakeState, targetCoord_LEFT);
           break;
         case 3:
           // fetch new target coord
@@ -155,13 +182,14 @@ const PlayZone = (props: Props) => {
             y: snakeState.head.data.y + 1,
           };
           // updating snake motion states
-          snakeMotionMechanics(snakeState, targetCoord_RIGHT);
+          if (!snakeAtBoundary(targetCoord_RIGHT))
+            snakeMotionMechanics(snakeState, targetCoord_RIGHT);
           break;
       }
-    }, 600); // 500 is test default
+    }, 400); // 500 is test default
     // removing interval to prevent memmory leak
     return () => clearInterval(snakeMovementInterval);
-  }, []);
+  }, [snakeDirection]);
 
   // making things go visible
   useEffect(() => {
